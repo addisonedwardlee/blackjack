@@ -25,7 +25,8 @@
 
     Hand.prototype.stand = function() {
       if (!this.first().get('revealed')) {
-        return this.first().flip();
+        this.first().flip();
+        return console.log('stand');
       }
     };
 

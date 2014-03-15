@@ -22,8 +22,14 @@ class window.App extends Backbone.Model
         @trigger('lose', @)
 
     #dealer flips card
-    if @get('dealerHand').first().get('revealed')
-      if 16 < dealerScore[1] < 22
+    else if @get('dealerHand').first().get('revealed')
+      #tieing conditions
+      if (dealerScore[0] or dealerScore[1]) is playerScore[1]
+        @trigger('tie', @)
+      else if (dealerScore[0] or dealerScore[1]) is playerScore[0]
+        @trigger('tie', @)
+      #other conditions
+      else if 16 < dealerScore[1] < 22
         if playerScore[1] or playerScore[0] > dealerScore[1]
           @trigger('win', @)
         else
@@ -35,15 +41,13 @@ class window.App extends Backbone.Model
           @trigger('lose', @)
       else if dealerScore[0] < 22
         @get('dealerHand').hit()
+        console.log('get new card')
         @checkScores()
-
-    #tieing conditions
-    if (dealerScore[0] or dealerScore[1]) is playerScore[1]
-      @trigger('tie', @)
-    if (dealerScore[0] or dealerScore[1]) is playerScore[0]
-      @trigger('tie', @)
 
   newHand: ->
     $('.games').empty()
     $('.message').empty()
     new AppView(model: new App()).$el.appendTo '.games'
+
+#check blackjack function
+#fix tieing conditions

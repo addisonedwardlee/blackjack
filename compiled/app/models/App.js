@@ -22,37 +22,35 @@
       playerScore = this.get('playerHand').scores();
       dealerScore = this.get('dealerHand').scores();
       if (dealerScore[0] > 21) {
-        this.trigger('win', this);
+        return this.trigger('win', this);
       } else if (playerScore[0] > 21) {
-        this.trigger('lose', this);
+        return this.trigger('lose', this);
       } else if (playerScore[1] === 21 && this.get('playerHand').length === 2) {
-        this.trigger('win', this);
+        return this.trigger('win', this);
       } else if (dealerScore[1] === 21 && this.get('dealerHand').length === 2) {
-        this.trigger('lose', this);
-      }
-      if (this.get('dealerHand').first().get('revealed')) {
-        if ((16 < (_ref = dealerScore[1]) && _ref < 22)) {
+        return this.trigger('lose', this);
+      } else if (this.get('dealerHand').first().get('revealed')) {
+        if ((dealerScore[0] || dealerScore[1]) === playerScore[1]) {
+          return this.trigger('tie', this);
+        } else if ((dealerScore[0] || dealerScore[1]) === playerScore[0]) {
+          return this.trigger('tie', this);
+        } else if ((16 < (_ref = dealerScore[1]) && _ref < 22)) {
           if (playerScore[1] || playerScore[0] > dealerScore[1]) {
-            this.trigger('win', this);
+            return this.trigger('win', this);
           } else {
-            this.trigger('lose', this);
+            return this.trigger('lose', this);
           }
         } else if ((16 < (_ref1 = dealerScore[0]) && _ref1 < 22)) {
           if (playerScore[1] || playerScore[0] > dealerScore[0]) {
-            this.trigger('win', this);
+            return this.trigger('win', this);
           } else {
-            this.trigger('lose', this);
+            return this.trigger('lose', this);
           }
         } else if (dealerScore[0] < 22) {
           this.get('dealerHand').hit();
-          this.checkScores();
+          console.log('get new card');
+          return this.checkScores();
         }
-      }
-      if ((dealerScore[0] || dealerScore[1]) === playerScore[1]) {
-        this.trigger('tie', this);
-      }
-      if ((dealerScore[0] || dealerScore[1]) === playerScore[0]) {
-        return this.trigger('tie', this);
       }
     };
 

@@ -11,6 +11,7 @@ class window.Hand extends Backbone.Collection
     # these actions are for the dealer only
     if !@first().get('revealed')
       @first().flip()
+      console.log('stand')
 
 
   scores: ->
