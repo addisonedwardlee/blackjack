@@ -4,7 +4,14 @@ class window.Hand extends Backbone.Collection
 
   initialize: (array, @deck, @isDealer) ->
 
-  hit: -> @add(@deck.pop()).last()
+  hit: ->
+    if @scores()[0] < 21 then @add(@deck.pop()).last()
+
+  stand: ->
+    # these actions are for the dealer only
+    if !@first().get('revealed')
+      @first().flip()
+
 
   scores: ->
     # The scores are an array of potential scores.
@@ -17,3 +24,9 @@ class window.Hand extends Backbone.Collection
       score + if card.get 'revealed' then card.get 'value' else 0
     , 0
     if hasAce then [score, score + 10] else [score]
+
+
+#stand - queue dealer function
+#dealer - if score <17, hit else this.checkscores
+#checkscores - check the scores and alert winner
+#dealer - if score === 21, you loserrrr

@@ -1,1 +1,1 @@
-new AppView(model: new App()).$el.appendTo 'body'
+new AppView(model: new App()).$el.appendTo '.games'
