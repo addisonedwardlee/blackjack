@@ -25,8 +25,7 @@
 
     Hand.prototype.stand = function() {
       if (!this.first().get('revealed')) {
-        this.first().flip();
-        return console.log('stand');
+        return this.first().flip();
       }
     };
 
@@ -42,6 +41,14 @@
         return [score, score + 10];
       } else {
         return [score];
+      }
+    };
+
+    Hand.prototype.bestScore = function() {
+      if (this.scores()[1] < 22) {
+        return this.scores()[1];
+      } else {
+        return this.scores()[0];
       }
     };
 

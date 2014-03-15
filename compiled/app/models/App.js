@@ -18,37 +18,32 @@
     };
 
     App.prototype.checkScores = function() {
-      var dealerScore, playerScore, _ref, _ref1;
-      playerScore = this.get('playerHand').scores();
-      dealerScore = this.get('dealerHand').scores();
-      if (dealerScore[0] > 21) {
-        return this.trigger('win', this);
-      } else if (playerScore[0] > 21) {
-        return this.trigger('lose', this);
-      } else if (playerScore[1] === 21 && this.get('playerHand').length === 2) {
-        return this.trigger('win', this);
-      } else if (dealerScore[1] === 21 && this.get('dealerHand').length === 2) {
-        return this.trigger('lose', this);
-      } else if (this.get('dealerHand').first().get('revealed')) {
-        if ((dealerScore[0] || dealerScore[1]) === playerScore[1]) {
+      var dealerScore, playerScore;
+      playerScore = this.get('playerHand').bestScore();
+      dealerScore = this.get('dealerHand').bestScore();
+      if (dealerScore > 21) {
+        this.trigger('win', this);
+      }
+      if (playerScore > 21) {
+        this.trigger('lose', this);
+      }
+      if (playerScore === 21 && this.get('playerHand').length === 2) {
+        this.trigger('win', this);
+      }
+      if (dealerScore === 21 && this.get('dealerHand').length === 2) {
+        this.trigger('lose', this);
+      }
+      if (this.get('dealerHand').first().get('revealed')) {
+        if (dealerScore === playerScore) {
           return this.trigger('tie', this);
-        } else if ((dealerScore[0] || dealerScore[1]) === playerScore[0]) {
-          return this.trigger('tie', this);
-        } else if ((16 < (_ref = dealerScore[1]) && _ref < 22)) {
-          if (playerScore[1] || playerScore[0] > dealerScore[1]) {
+        } else if ((16 < dealerScore && dealerScore < 22)) {
+          if (playerScore > dealerScore) {
             return this.trigger('win', this);
           } else {
             return this.trigger('lose', this);
           }
-        } else if ((16 < (_ref1 = dealerScore[0]) && _ref1 < 22)) {
-          if (playerScore[1] || playerScore[0] > dealerScore[0]) {
-            return this.trigger('win', this);
-          } else {
-            return this.trigger('lose', this);
-          }
-        } else if (dealerScore[0] < 22) {
+        } else if (dealerScore < 22) {
           this.get('dealerHand').hit();
-          console.log('get new card');
           return this.checkScores();
         }
       }

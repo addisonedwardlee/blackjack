@@ -11,8 +11,6 @@ class window.Hand extends Backbone.Collection
     # these actions are for the dealer only
     if !@first().get('revealed')
       @first().flip()
-      console.log('stand')
-
 
   scores: ->
     # The scores are an array of potential scores.
@@ -26,8 +24,4 @@ class window.Hand extends Backbone.Collection
     , 0
     if hasAce then [score, score + 10] else [score]
 
-
-#stand - queue dealer function
-#dealer - if score <17, hit else this.checkscores
-#checkscores - check the scores and alert winner
-#dealer - if score === 21, you loserrrr
+  bestScore: -> if @scores()[1] < 22 then @scores()[1] else @scores()[0]
