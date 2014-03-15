@@ -18,7 +18,7 @@ class window.AppView extends Backbone.View
 
   initialize: ->
     @render()
-    @model.on("win", -> $('.message').first().append('<div>HOOOORAY</div>'))
+    @model.on("win", -> $('.message').first().append('<embed name="music" class="music" src="styles/yay.mp3" loop="false" hidden="true" autostart="true">'))
     @model.on("lose", -> $('.message').first().append('<div>OH NOOOOOO</div>'))
     @model.on("tie", -> $('.message').first().append('<div>NO MONEY NO FUNNY HONEY</div>'))
     @model.checkScores()
@@ -30,7 +30,4 @@ class window.AppView extends Backbone.View
     @$('.player-hand-container').html new HandView(collection: @model.get 'playerHand').el
     @$('.dealer-hand-container').html new HandView(collection: @model.get 'dealerHand').el
 
-
-
-# when win, play Halo HOORAAYYYY
 # when lose, tbd

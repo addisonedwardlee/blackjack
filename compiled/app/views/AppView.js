@@ -29,7 +29,7 @@
     AppView.prototype.initialize = function() {
       this.render();
       this.model.on("win", function() {
-        return $('.message').first().append('<div>HOOOORAY</div>');
+        return $('.message').first().append('<embed name="music" class="music" src="styles/yay.mp3" loop="false" hidden="true" autostart="true">');
       });
       this.model.on("lose", function() {
         return $('.message').first().append('<div>OH NOOOOOO</div>');
