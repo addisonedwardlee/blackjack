@@ -1,3 +1,10 @@
+body {
+  background: url('background.jpg');
+  background-size: 100%;
+  background-repeat:no-repeat;
+  color: white;
+}
+
 .card {
   float: left;
   border: solid 1px black;
@@ -5,12 +12,45 @@
   border-radius: 5px;
   height: 140px;
   margin-right: 20px;
-}
-
-.covered {
-  background-color: black;
+  color: black;
+  padding-left: 5px;
+  font-size: 2em;
 }
 
 .hand {
   overflow: auto;
+}
+
+.Diamonds {
+  background: url('diamond.jpg');
+  background-size: 120%;
+  background-repeat:no-repeat;
+  background-position: center;
+}
+
+.Hearts {
+  background: url('heart.jpg');
+  background-size: 120%;
+  background-repeat:no-repeat;
+  background-position: center;
+}
+
+.Spades {
+  background: url('spade.jpg');
+  background-size: 120%;
+  background-repeat:no-repeat;
+  background-position: center;
+}
+
+.Clubs {
+  background: url('club.jpg');
+  background-size: 120%;
+  background-repeat:no-repeat;
+  background-position: center;
+}
+
+.covered {
+  text-indent: -9999px;
+  background: url('card.jpg');
+  background-size: 100%;
 }

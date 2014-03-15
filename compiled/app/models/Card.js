@@ -18,13 +18,13 @@
         rankName: (function() {
           switch (params.rank) {
             case 0:
-              return 'King';
+              return 'K';
             case 1:
-              return 'Ace';
+              return 'A';
             case 11:
-              return 'Jack';
+              return 'J';
             case 12:
-              return 'Queen';
+              return 'Q';
             default:
               return params.rank;
           }
